@@ -1,482 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | Password Reset</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Password Reset</title>
 
-    <style>
-        :root {
-            --purple: #6f42c1;
-            --primary-btn: #91B3FA;
-            --btn-hover: #6f42c1;
-            --toggle-on: #3a61e0;
-            --input-bg: #F8F8F8;
-            --border: #797979;
-            --text-dark: #2D2D2D;
-        }
+  <style>
+    :root {
+      --purple: #6f42c1;
+      --primary-btn: #91B3FA;
+      --btn-hover: #6f42c1;
+      --toggle-on: #3a61e0;
+      --input-bg: #F8F8F8;
+      --border: #797979;
+      --text-dark: #2D2D2D;
+    }
 
-        * {
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f3f4f6;
-        }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f3f4f6;
+    }
 
-        .card {
-            background: #fff;
-            width: 900px;
-            max-width: 95vw;
-            border-radius: 40px;
-            box-shadow: 0px 8px 4px rgba(0, 0, 0, 0.25);
-            display: flex;
-            overflow: hidden;
-        }
+    .card {
+      background: #fff;
+      width: 900px;
+      max-width: 95vw;
+      border-radius: 40px;
+      box-shadow: 0px 8px 4px rgba(0,0,0,0.25);
+      display: flex;
+      overflow: hidden;
+    }
 
-        .left {
-            flex: 1;
-            padding: 68px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
+    .left {
+      flex: 1;
+      padding: 68px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
 
-        .left img {
-            max-width: 100%;
-            max-height: 300px;
-            object-fit: contain;
-        }
+    .left img {
+      max-width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+    }
 
-        .right {
-            flex: 1;
-            padding: 50px 40px;
-            border-left: 2px solid #E5E7EB;
-            position: relative;
-        }
+    .right {
+      flex: 1;
+      padding: 50px 40px;
+      border-left: 2px solid #E5E7EB;
+      position: relative;
+    }
 
-        .toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-        }
+    .toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
 
-        .switch {
-            width: 50px;
-            height: 24px;
-            background: #ccc;
-            border-radius: 20px;
-            position: relative;
-            cursor: pointer;
-        }
+    .switch {
+      width: 50px;
+      height: 24px;
+      background: #ccc;
+      border-radius: 20px;
+      position: relative;
+      cursor: pointer;
+    }
 
-        .switch::after {
-            content: '';
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            border-radius: 50%;
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            transition: all .3s;
-        }
+    .switch::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: all .3s;
+    }
 
-        .switch.on {
-            background: var(--toggle-on);
-        }
+    .switch.on {
+      background: var(--toggle-on);
+    }
 
-        .switch.on::after {
-            left: 28px;
-        }
+    .switch.on::after {
+      left: 28px;
+    }
 
-        h1 {
-            margin-top: 30px;
-            color: var(--purple);
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            animation: slide 0.6s ease-out;
-        }
+    h1 {
+      margin-top: 30px;
+      color: var(--purple);
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      animation: slide 0.6s ease-out;
+    }
 
-        @keyframes slide {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
+    @keyframes slide {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
 
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+    .field {
+      margin-top: 25px;
+      position: relative;
+    }
 
-        .field {
-            margin-top: 25px;
-            position: relative;
-        }
+    .field input {
+      width: 27rem;
+      max-width: 100%;
+      height: 60px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--input-bg);
+      padding: 0 50px 0 20px;
+      font-size: 1rem;
+    }
 
-        .field input {
-            width: 27rem;
-            max-width: 100%;
-            height: 60px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            background: var(--input-bg);
-            padding: 0 50px 0 20px;
-            font-size: 1rem;
-        }
+    .icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      user-select: none;
+    }
 
-        .icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            user-select: none;
-        }
+    .btn {
+      margin: 40px auto 0;
+      width: 200px;
+      height: 60px;
+      border-radius: 10px;
+      border: none;
+      background: var(--primary-btn);
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all .2s;
+    }
 
-        .btn {
-            margin: 40px auto 0;
-            width: 200px;
-            height: 60px;
-            border-radius: 10px;
-            border: none;
-            background: var(--primary-btn);
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--text-dark);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all .2s;
-        }
+    .btn:hover {
+      background: var(--btn-hover);
+      color: #fff;
+    }
 
-        .btn:hover {
-            background: var(--btn-hover);
-            color: #fff;
-        }
+    .btn:disabled {
+      background: #575757;
+      color: #fff;
+      cursor: not-allowed;
+    }
 
-        .btn:disabled {
-            background: #575757;
-            color: #fff;
-            cursor: not-allowed;
-        }
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid #fff;
+      border-top: 3px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
 
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 3px solid #fff;
-            border-top: 3px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
+    .qr {
+      text-align: center;
+      margin-top: 20px;
+      color: #555;
+      font-size: 0.9rem;
+    }
 
-        .qr {
-            text-align: center;
-            margin-top: 20px;
-            color: #555;
-            font-size: 0.9rem;
-        }
+    .hidden { display: none; }
 
-        .hidden {
-            display: none;
-        }
-
-        @media (max-width: 480px) {
-            .left {
-                display: none;
-            }
-
-            .right {
-                padding: 30px 20px;
-                border-left: none;
-            }
-        }
-
-        @media (min-width: 481px) and (max-width: 768px) {
-            .card {
-                width: 90%;
-            }
-
-            .left {
-                padding: 40px 20px;
-            }
-
-            .right {
-                padding: 40px 20px;
-            }
-
-            .field input {
-                width: 100%;
-            }
-        }
-
-        /* TOAST NOTIFICATIONS */
-        #toast-container {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .toast {
-            min-width: 300px;
-            padding: 16px 24px;
-            background: #fff;
-            color: #333;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            animation: slideIn 0.3s ease-out forwards;
-            border-left: 6px solid #ccc;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .toast.success {
-            border-left-color: #28a745;
-        }
-
-        .toast.error {
-            border-left-color: #dc3545;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-        }
-    </style>
+    @media (max-width: 480px) {
+      .left { display: none; }
+      .right { padding: 30px 20px; border-left: none; }
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="card">
-        <div class="left">
-            <a href="xelrate savee.png">
-                <img src="xelrate savee.png"  alt="Company Logo">
-            </a>
-        </div>
+<div class="card">
+  <div class="left">
+    <img id="companyImg" alt="Company Logo">
+  </div>
 
-        <div class="right">
-            <div class="toggle">
-                <span id="roleLabel">User</span>
-                <div class="switch" id="roleSwitch"></div>
-            </div>
-
-            <h1>Sign In to First Consulting Group</h1>
-
-            <div id="loginForm">
-                <div class="field">
-                    <input id="userId" placeholder="Employee ID">
-                    <span class="icon">👤</span>
-                </div>
-
-                <div class="field">
-                    <input id="password" type="password" placeholder="Password">
-                    <span class="icon" id="togglePwd">👁</span>
-                </div>
-
-                <button class="btn" id="loginBtn">Sign In</button>
-                <div class="qr" id="qrArea">Login by QR Code</div>
-            </div>
-
-            <div id="resetForm" class="hidden">
-                <div class="field">
-                    <input id="newPwd" type="password" placeholder="New Password">
-                </div>
-                <div class="field">
-                    <input id="confirmPwd" type="password" placeholder="Confirm Password">
-                    <span class="icon" id="toggleResetPwd">👁</span>
-                </div>
-                <button class="btn" id="resetBtn" disabled>Reset Password</button>
-            </div>
-        </div>
+  <div class="right">
+    <div class="toggle">
+      <span id="roleLabel">User</span>
+      <div class="switch" id="roleSwitch"></div>
     </div>
 
-    <div id="toast-container"></div>
+    <h1>Sign In to First Consulting Group</h1>
 
-    <script>
-       
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = message;
+    <div id="loginForm">
+      <div class="field">
+        <input id="userId" placeholder="Employee ID">
+        <span class="icon">👤</span>
+      </div>
 
-            container.appendChild(toast);
+      <div class="field">
+        <input id="password" type="password" placeholder="Password">
+        <span class="icon" id="togglePwd">👁</span>
+      </div>
 
-            setTimeout(() => {
-                toast.style.animation = 'fadeOut 0.3s ease-in forwards';
-                toast.addEventListener('animationend', () => toast.remove());
-            }, 3000);
-        }
+      <button class="btn" id="loginBtn">Sign In</button>
+      <div class="qr" id="qrArea">Login by QR Code</div>
+    </div>
 
-      
-        (function initStorage() {
+    <div id="resetForm" class="hidden">
+      <div class="field">
+        <input id="newPwd" type="password" placeholder="New Password">
+      </div>
+      <div class="field">
+        <input id="confirmPwd" type="password" placeholder="Confirm Password">
+        <span class="icon" id="toggleResetPwd">👁</span>
+      </div>
+      <button class="btn" id="resetBtn" disabled>Reset Password</button>
+    </div>
+  </div>
+</div>
 
-            if (!localStorage.getItem('users')) {
-                localStorage.setItem('users', JSON.stringify([
-                    {
-                        id: 'EMP-001',
-                        role: 'user',
-                        password: 'password123',
-                        name: 'Aisha Khan',
-                        defaultPassword: true
-                    },
-                    {
-                        id: 'ADMIN-01',
-                        role: 'admin',
-                        password: 'admin@2025',
-                        name: 'Admin Person',
-                        defaultPassword: false
-                    }
-                ]));
-            }
+<script>
+/* ===============================
+   AUTO INITIALIZE LOCAL STORAGE
+================================ */
+(function initStorage() {
 
-            if (!localStorage.getItem('config')) {
-                localStorage.setItem('config', JSON.stringify({
-                    companyInfo: {
-                        mainImage: 'https://via.placeholder.com/300x150?text=Company+Logo'
-                    },
-                    ui: {
-                        showQrLogin: true,
-                        dateFormat: 'DD-MM-YYYY'
-                    }
-                }));
-            }
+  if (!localStorage.getItem('users')) {
+    localStorage.setItem('users', JSON.stringify([
+      {
+        id: 'EMP-001',
+        role: 'user',
+        password: 'password123',
+        name: 'Aisha Khan',
+        defaultPassword: true
+      },
+      {
+        id: 'ADMIN-01',
+        role: 'admin',
+        password: 'admin@2025',
+        name: 'Admin Person',
+        defaultPassword: false
+      }
+    ]));
+  }
 
-        })();
+  if (!localStorage.getItem('config')) {
+    localStorage.setItem('config', JSON.stringify({
+      companyInfo: {
+        mainImage: 'https://via.placeholder.com/300x150?text=Company+Logo'
+      },
+      ui: {
+        showQrLogin: true
+      }
+    }));
+  }
 
-     
+})();
 
-        const config = JSON.parse(localStorage.getItem('config'));
-        let users = JSON.parse(localStorage.getItem('users'));
+/* ===============================
+   MAIN LOGIC
+================================ */
 
-        document.getElementById('companyImg').src = config.companyInfo.mainImage;
-        document.getElementById('qrArea').style.display =
-            config.ui.showQrLogin ? 'block' : 'none';
+const config = JSON.parse(localStorage.getItem('config'));
+let users = JSON.parse(localStorage.getItem('users'));
 
-        let role = 'user';
-        const roleSwitch = document.getElementById('roleSwitch');
-        const roleLabel = document.getElementById('roleLabel');
-        const userIdInput = document.getElementById('userId');
+document.getElementById('companyImg').src = config.companyInfo.mainImage;
+document.getElementById('qrArea').style.display =
+  config.ui.showQrLogin ? 'block' : 'none';
 
-        roleSwitch.onclick = () => {
-            role = role === 'user' ? 'admin' : 'user';
-            roleSwitch.classList.toggle('on');
-            roleLabel.textContent = role === 'user' ? 'User' : 'Admin';
-            userIdInput.placeholder = role === 'user' ? 'Employee ID' : 'Admin ID';
-        };
+let role = 'user';
+const roleSwitch = document.getElementById('roleSwitch');
+const roleLabel = document.getElementById('roleLabel');
+const userIdInput = document.getElementById('userId');
 
-        document.getElementById('togglePwd').onclick = () => {
-            const p = document.getElementById('password');
-            p.type = p.type === 'password' ? 'text' : 'password';
-        };
+roleSwitch.onclick = () => {
+  role = role === 'user' ? 'admin' : 'user';
+  roleSwitch.classList.toggle('on');
+  roleLabel.textContent = role === 'user' ? 'User' : 'Admin';
+  userIdInput.placeholder = role === 'user' ? 'Employee ID' : 'Admin ID';
+};
 
-        document.getElementById('toggleResetPwd').onclick = () => {
-            ['newPwd', 'confirmPwd'].forEach(id => {
-                const el = document.getElementById(id);
-                el.type = el.type === 'password' ? 'text' : 'password';
-            });
-        };
+document.getElementById('togglePwd').onclick = () => {
+  const p = document.getElementById('password');
+  p.type = p.type === 'password' ? 'text' : 'password';
+};
 
-        document.getElementById('loginBtn').onclick = () => {
-            const id = userIdInput.value.trim();
-            const pwd = document.getElementById('password').value;
-            const btn = document.getElementById('loginBtn');
+document.getElementById('toggleResetPwd').onclick = () => {
+  ['newPwd', 'confirmPwd'].forEach(id => {
+    const el = document.getElementById(id);
+    el.type = el.type === 'password' ? 'text' : 'password';
+  });
+};
 
-            btn.disabled = true;
-            btn.innerHTML = '<div class="spinner"></div>';
+document.getElementById('loginBtn').onclick = () => {
+  const id = userIdInput.value.trim();
+  const pwd = document.getElementById('password').value;
+  const btn = document.getElementById('loginBtn');
 
-            setTimeout(() => {
-                const user = users.find(u => u.id === id && u.role === role && u.password === pwd);
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner"></div>';
 
-                if (!user) {
-                    showToast('Invalid credentials', 'error');
-                    setTimeout(() => location.reload(), 2000);
-                    return;
-                }
+  setTimeout(() => {
+    const user = users.find(u => u.id === id && u.role === role && u.password === pwd);
 
-                sessionStorage.setItem('sessionUser', JSON.stringify({
-                    ...user,
-                    loggedAt: new Date().toISOString()
-                }));
+    if (!user) {
+      alert('Invalid credentials');
+      location.reload();
+      return;
+    }
 
-                if (user.defaultPassword) {
-                    document.getElementById('loginForm').classList.add('hidden');
-                    document.getElementById('resetForm').classList.remove('hidden');
-                } else {
-                    showToast('Login successful', 'success');
-                    setTimeout(() => location.reload(), 1500);
-                }
-            }, 1000);
-        };
+    sessionStorage.setItem('sessionUser', JSON.stringify(user));
 
-        const newPwd = document.getElementById('newPwd');
-        const confirmPwd = document.getElementById('confirmPwd');
-        const resetBtn = document.getElementById('resetBtn');
+    if (user.defaultPassword) {
+      document.getElementById('loginForm').classList.add('hidden');
+      document.getElementById('resetForm').classList.remove('hidden');
+    } else {
+      alert('Login successful');
+      location.reload();
+    }
+  }, 1000);
+};
 
-        function validateReset() {
-            resetBtn.disabled = !(newPwd.value && newPwd.value === confirmPwd.value);
-        }
+const newPwd = document.getElementById('newPwd');
+const confirmPwd = document.getElementById('confirmPwd');
+const resetBtn = document.getElementById('resetBtn');
 
-        newPwd.oninput = confirmPwd.oninput = validateReset;
+function validateReset() {
+  resetBtn.disabled = !(newPwd.value && newPwd.value === confirmPwd.value);
+}
 
-        resetBtn.onclick = () => {
-            const session = JSON.parse(sessionStorage.getItem('sessionUser'));
-            const idx = users.findIndex(u => u.id === session.id);
-            users[idx].password = newPwd.value;
-            users[idx].defaultPassword = false;
-            localStorage.setItem('users', JSON.stringify(users));
-            showToast('Password changed successfully!', 'success');
-            setTimeout(() => location.reload(), 2000);
-        };
-    </script>
+newPwd.oninput = confirmPwd.oninput = validateReset;
+
+resetBtn.onclick = () => {
+  const session = JSON.parse(sessionStorage.getItem('sessionUser'));
+  const idx = users.findIndex(u => u.id === session.id);
+  users[idx].password = newPwd.value;
+  users[idx].defaultPassword = false;
+  localStorage.setItem('users', JSON.stringify(users));
+  alert('Password changed successfully!');
+  location.reload();
+};
+</script>
 
 </body>
-
 </html>
-
-
