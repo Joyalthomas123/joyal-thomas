@@ -266,16 +266,17 @@
     ]));
   }
 
-  if (!localStorage.getItem('config')) {
-    localStorage.setItem('config', JSON.stringify({
-      companyInfo: {
-        mainImage: 'https://via.placeholder.com/300x150?text=Company+Logo'
-      },
-      ui: {
-        showQrLogin: true
-      }
-    }));
-  }
+ if (!localStorage.getItem('config')) {
+  localStorage.setItem('config', JSON.stringify({
+    companyInfo: {
+      mainImage: 'xelrate savee.png'
+    },
+    ui: {
+      showQrLogin: true
+    }
+  }));
+}
+
 
 })();
 
@@ -366,4 +367,5 @@ resetBtn.onclick = () => {
 
 </body>
 </html>
+
 
