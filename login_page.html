@@ -242,9 +242,7 @@
 </div>
 
 <script>
-/* ===============================
-   AUTO INITIALIZE LOCAL STORAGE
-================================ */
+
 (function initStorage() {
 
   if (!localStorage.getItem('users')) {
@@ -279,9 +277,6 @@
 
 })();
 
-/* ===============================
-   MAIN LOGIC
-================================ */
 
 const config = JSON.parse(localStorage.getItem('config'));
 let users = JSON.parse(localStorage.getItem('users'));
@@ -366,3 +361,4 @@ resetBtn.onclick = () => {
 
 </body>
 </html>
+
